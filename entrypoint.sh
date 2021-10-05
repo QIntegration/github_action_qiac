@@ -31,7 +31,7 @@ fi
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --tag [{\"BRANCH_NAME\":\"$GITHUB_REF\"},{\"REPOSITORY_NAME\":\"$GITHUB_REPOSITORY\"}] > /result.json
  if [ $? -ne 0 ]; then
-    exit 0
+    exit 1
  fi
  echo "Scanning Completed at - $(date +"%Y-%m-%d %H:%M:%S")"
  #process result for annotation
