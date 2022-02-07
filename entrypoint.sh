@@ -40,6 +40,7 @@ fi
  pwd
  mv scan_response_*.sarif /response.sarif
  cd ..
+ cd ..
  mkdir results
  cp /response.sarif results
  chmod 755 results/response.sarif
