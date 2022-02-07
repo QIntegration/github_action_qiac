@@ -37,7 +37,7 @@ fi
  let "LEN+=1"
  SCAN_ID="$(grep "$SCANID_STR" /result.json  | cut -c $LEN-)"
  echo $SCAN_ID
- if [ -n $SCAN_ID ]
+ if [[ ! -z "$SCAN_ID" ]]
  then
      qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
      if [ -f scan_response_*.sarif ]; then
