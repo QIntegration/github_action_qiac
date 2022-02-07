@@ -35,8 +35,9 @@ fi
  ls -la
  mv scan_response_*.sarif /response.sarif
  ls -la
+ chmod 777 /response.sarif
  pwd
- cp /response.sarif ../results/
+ #cp /response.sarif ../results/
  ls -la /
  if [ $? -ne 0 ]; then
     exit 1
