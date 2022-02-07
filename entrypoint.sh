@@ -8,8 +8,6 @@ echo "Action triggered by $GITHUB_EVENT_NAME event"
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
 then
-    pwd
-    ls -la
     if [ $(git diff --name-only --diff-filter=ACMRT HEAD^ HEAD | wc -l) -eq "0" ]; then 
         echo "There are no files/folders to scan."
         exit 0
