@@ -2,6 +2,7 @@
 
 SCANFOLDER=$1
 SOURCE_UUID="8c0ac08e-60ad-4a8a-9571-a2c56514b61a"
+SCANID_STR="Scan launched successfully. Scan ID: "
 
 echo "Action triggered by $GITHUB_EVENT_NAME event"
 
@@ -33,7 +34,13 @@ fi
  #Calling Iac CLI
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
- qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s > /raw_result.sarif
+ LEN=${#SCANID_STR}
+ let "LEN+=1"
+ SCAN_ID="$(grep "$SCANID_STR" /result.json  | cut -c $LEN-)"
+ echo $SCAN_ID
+ qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
+
+ #qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s > /raw_result.sarif
  if [ -f scan_response_*.sarif ]; then
      mv scan_response_*.sarif ../response.sarif
      chmod 777 ../response.sarif
