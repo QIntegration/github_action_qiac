@@ -33,16 +33,15 @@ fi
  #Calling Iac CLI
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
- qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s
+ qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s > /raw_result.sarif
+ #mv scan_response_*.sarif ../response.sarif
  ls -la
- mv scan_response_*.sarif ../response.sarif
- 
- ls -la
- chmod 777 ../response.sarif
+ #chmod 777 ../response.sarif
  pwd
  cd ..
-#  mkdir results
-#  cp /response.sarif results
+ mkdir results
+ mv scan_response_*.sarif results/response.sarif
+ chmod 755 results/response.sarif
  ls -la /
  if [ $? -ne 0 ]; then
     exit 1
