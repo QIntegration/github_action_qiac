@@ -32,9 +32,12 @@ fi
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s
- ls
+ ls -la
  mv scan_response_*.sarif response.sarif
  ls -la
+ pwd
+ cp response.sarif ../results/
+ ls -la /
  if [ $? -ne 0 ]; then
     exit 1
  fi
