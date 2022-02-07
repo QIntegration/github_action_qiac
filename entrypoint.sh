@@ -37,9 +37,11 @@ fi
  let "LEN+=1"
  SCAN_ID="$(grep "$SCANID_STR" /result.json  | cut -c $LEN-)"
  echo $SCAN_ID
- qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
-
- #qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s > /raw_result.sarif
+ if ((${#SCAN_ID} > 0))
+ then
+    qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
+ fi
+ 
  if [ -f scan_response_*.sarif ]; then
      echo "File exist"
      mv scan_response_*.sarif ../response.sarif
@@ -52,7 +54,6 @@ fi
     # This issue is an open state when this issue is resolved from the GitHub side we will remove below code line. Same for line no 13.
     echo "{\"version\": \"2.1.0\",\"runs\": [{\"tool\": {\"driver\": {\"name\": \"QualysIaCSecurity\",\"organization\": \"Qualys\"}},\"results\": []}]}" > ../response.sarif
  fi
- ls -la ../
  if [ $? -ne 0 ]; then
     exit 1
  fi
