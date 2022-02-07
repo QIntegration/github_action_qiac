@@ -40,19 +40,20 @@ fi
  if [[ ! -z "$SCAN_ID" ]]
  then
      qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
-     if [ -f scan_response_*.sarif ]; then
-         echo "File exist"
-         mv scan_response_*.sarif ../response.sarif
-         chmod 777 ../response.sarif
-     else
-        echo "File not exist"
-        # Adding empty SARIF response in response.sarif file.
-        # This issue is from github/codeql-action/upload-sarif@v1 side. 
-        # Issue link: https://github.com/psalm/psalm-github-actions/issues/23
-        # This issue is an open state when this issue is resolved from the GitHub side we will remove below code line. Same for line no 13.
-        echo "{\"version\": \"2.1.0\",\"runs\": [{\"tool\": {\"driver\": {\"name\": \"QualysIaCSecurity\",\"organization\": \"Qualys\"}},\"results\": []}]}" > ../response.sarif
-     fi
  fi
+ if [ -f scan_response_*.sarif ]; then
+     echo "File exist"
+     mv scan_response_*.sarif ../response.sarif
+     chmod 777 ../response.sarif
+ else
+    echo "File not exist"
+    # Adding empty SARIF response in response.sarif file.
+    # This issue is from github/codeql-action/upload-sarif@v1 side. 
+    # Issue link: https://github.com/psalm/psalm-github-actions/issues/23
+    # This issue is an open state when this issue is resolved from the GitHub side we will remove below code line. Same for line no 13.
+    echo "{\"version\": \"2.1.0\",\"runs\": [{\"tool\": {\"driver\": {\"name\": \"QualysIaCSecurity\",\"organization\": \"Qualys\"}},\"results\": []}]}" > ../response.sarif
+ fi
+
  if [ $? -ne 0 ]; then
     exit 1
  fi
