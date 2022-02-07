@@ -42,9 +42,11 @@ fi
 
  #qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s > /raw_result.sarif
  if [ -f scan_response_*.sarif ]; then
+     echo "File exist"
      mv scan_response_*.sarif ../response.sarif
      chmod 777 ../response.sarif
  else
+    echo "File exist"
     # Adding empty SARIF response in response.sarif file.
     # This issue is from github/codeql-action/upload-sarif@v1 side. 
     # Issue link: https://github.com/psalm/psalm-github-actions/issues/23
