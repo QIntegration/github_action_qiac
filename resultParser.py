@@ -41,8 +41,8 @@ def print_failed_checks(output):
     failed_checks = False
     for result in output.get("result"):
         failed_checks = print_error_message(result)
-    #if failed_checks:
-    #    exit(-1)
+    if failed_checks:
+        exit(-1)
 
 
 # Press the green button in the gutter to run the script.
