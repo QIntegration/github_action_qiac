@@ -35,14 +35,14 @@ fi
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s
  ls -la
- mv scan_response_*.sarif /response.sarif
- cp /response.sarif ../
+ mv scan_response_*.sarif ../response.sarif
+ 
  ls -la
- chmod 777 /response.sarif
+ chmod 777 ../response.sarif
  pwd
  cd ..
- mkdir results
- cp /response.sarif results
+#  mkdir results
+#  cp /response.sarif results
  ls -la /
  if [ $? -ne 0 ]; then
     exit 1
