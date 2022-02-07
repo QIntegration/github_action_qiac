@@ -34,18 +34,13 @@ fi
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID -m SARIF -s > /raw_result.sarif
- #mv scan_response_*.sarif ../response.sarif
- ls -la
- #chmod 777 ../response.sarif
- pwd
- mv scan_response_*.sarif ../response.sarif
- chmod 777 ../response.sarif
-#  cd ..
-#  cd ..
-#  mkdir results
-#  cp /response.sarif results
-#  chmod 755 results/response.sarif
- ls -la /
+ if [ -f scan_response_*.sarif ]; then
+     mv scan_response_*.sarif ../response.sarif
+     chmod 777 ../response.sarif
+ else
+    echo "{\"version\": \"2.1.0\",\"runs\": [{\"tool\": {\"driver\": {\"name\": \"QualysIaCSecurity\",\"organization\": \"Qualys\"}},\"results\": []}]}" > ../response.sarif
+ fi
+ ls -la ../
  if [ $? -ne 0 ]; then
     exit 1
  fi
