@@ -45,7 +45,7 @@ fi
      mv scan_response_*.sarif ../response.sarif
      chmod 777 ../response.sarif
  else
-    echo "File exist"
+    echo "File not exist"
     # Adding empty SARIF response in response.sarif file.
     # This issue is from github/codeql-action/upload-sarif@v1 side. 
     # Issue link: https://github.com/psalm/psalm-github-actions/issues/23
