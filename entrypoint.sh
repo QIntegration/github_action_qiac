@@ -38,9 +38,10 @@ fi
  ls -la
  #chmod 777 ../response.sarif
  pwd
+ mv scan_response_*.sarif /response.sarif
  cd ..
  mkdir results
- mv scan_response_*.sarif results/response.sarif
+ cp /response.sarif results
  chmod 755 results/response.sarif
  ls -la /
  if [ $? -ne 0 ]; then
