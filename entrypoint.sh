@@ -45,7 +45,10 @@ fi
     echo "Scan ID:" $SCAN_ID
     qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
  fi
+ pwd
  ls -la ../
+ pwd
+ ls -la
  if [ -f scan_response_*.sarif ]; then
      mv scan_response_*.sarif ../response.sarif
      chmod 755 ../response.sarif
