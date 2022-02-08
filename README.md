@@ -129,6 +129,47 @@ jobs:
               directory: 'path of directory to scan (optional)'
 ```
 
+### Scan IaC in your repository on push/pull request/scheduled event with the step of uploading SARIF file on GitHub.
+Note: Upload SARIF file Step will upload your scan report on GitHub and it will show all security alerts(if any) under **Security -> Code scanning alerts** tab.
+```yaml
+name: Qualys IAC Scan 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main 
+  schedule:
+    - cron:  '*/5 * * * *'
+jobs:
+    Qualys_iac_scan:
+        runs-on: ubuntu-latest
+        name: Qualys IaC Scan
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2 
+            with:
+                fetch-depth: 0
+    
+          - name: Qualys IAC scan action step
+            uses: QIntegration/github_action_qiac@main
+            id: qiac
+            env:
+                URL: ${{ secrets.URL }}
+                UNAME: ${{ secrets.USERNAME }}
+                PASS: ${{ secrets.PASSWORD }}
+            with:
+              directory: 'path of directory to scan (optional)'
+          
+          - name: Upload SARIF file
+            uses: github/codeql-action/upload-sarif@v1
+            if: always() 
+            with:
+                 sarif_file: response.sarif
+
+```
+
 ## Prerequisites for Qualys IaC GithHub Action
 1. Valid Qualys Credentials and subscription of Qualys CloudView module.
 2. Use of `actions/checkout@v2` with ` fetch-depth: 0` before calling Qualys IaC GitHub action.
