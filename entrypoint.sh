@@ -1,6 +1,7 @@
 #!/bin/sh -l
 
 SCANFOLDER=$1
+echo "scan dir: " $SCANFOLDER
 SOURCE_UUID="8c0ac08e-60ad-4a8a-9571-a2c56514b61a"
 SCANID_STR="Scan launched successfully. Scan ID: "
 
@@ -29,7 +30,6 @@ else
         echo "Scan Directory Path is - $SCANFOLDER"
     fi
 fi
- echo "scan dir: " $SCANFOLDER
  #Calling Iac CLI
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
