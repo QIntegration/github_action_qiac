@@ -1,7 +1,6 @@
 #!/bin/sh -l
 
 SCANFOLDER=$1
-echo "scan dir: " $SCANFOLDER
 SOURCE_UUID="8c0ac08e-60ad-4a8a-9571-a2c56514b61a"
 SCANID_STR="Scan launched successfully. Scan ID: "
 
@@ -33,6 +32,10 @@ fi
  #Calling Iac CLI
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
+ if [ $? -ne 0 ]; then
+    exit 1
+ fi
+
  LEN=${#SCANID_STR}
  let "LEN+=1"
  SCAN_ID="$(grep "$SCANID_STR" /result.json  | cut -c $LEN-)"
@@ -53,9 +56,6 @@ fi
     echo "{\"version\": \"2.1.0\",\"runs\": [{\"tool\": {\"driver\": {\"name\": \"QualysIaCSecurity\",\"organization\": \"Qualys\"}},\"results\": []}]}" > ../response.sarif
  fi
 
- if [ $? -ne 0 ]; then
-    exit 1
- fi
  echo "Scanning Completed at - $(date +"%Y-%m-%d %H:%M:%S")"
  #process result for annotation
  echo " "
