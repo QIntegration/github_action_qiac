@@ -29,7 +29,7 @@ else
         echo "Scan Directory Path is - $SCANFOLDER"
     fi
 fi
-
+ echo "scan dir: " $SCANFOLDER
  #Calling Iac CLI
  echo "Scanning Started at - $(date +"%Y-%m-%d %H:%M:%S")"
  qiac scan -a $URL -u $UNAME -p $PASS -d $SCANFOLDER -m json -n GitHubActionScan --branch $GITHUB_REF --gitrepo $GITHUB_REPOSITORY --source $SOURCE_UUID > /result.json
