@@ -4,7 +4,7 @@ def print_error_message(result):
     error_message = ""
     failed_checks = False
     if result.get("results").get("parsingErrors"):
-        print("::error::Parsing error file paths="+str(result.get("results").get("parsingErrors")))
+        #print("::error::Parsing error file paths="+str(result.get("results").get("parsingErrors")))
         failed_checks = True
     if result.get("results").get("failedChecks"):
         for r in result.get("results").get("failedChecks"):
@@ -29,7 +29,7 @@ def print_error_message(result):
             if error_message.endswith(", "):
                 error_message = error_message[:-2]
 
-            print(error_message)
+            #print(error_message)
             failed_checks = True
             error_message = ""
     return failed_checks
