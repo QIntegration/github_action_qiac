@@ -43,11 +43,9 @@ fi
     qiac getresult -a $URL -u $UNAME -p $PASS -i $SCAN_ID -m SARIF -s > /raw_result.sarif
  fi
  if [ -f scan_response_*.sarif ]; then
-     echo "File exist"
      mv scan_response_*.sarif ../response.sarif
      chmod 777 ../response.sarif
  else
-    echo "File not exist"
     # Adding empty SARIF response in response.sarif file.
     # This issue is from github/codeql-action/upload-sarif@v1 side. 
     # Issue link: https://github.com/psalm/psalm-github-actions/issues/23
