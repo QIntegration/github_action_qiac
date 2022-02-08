@@ -44,7 +44,7 @@ fi
  fi
  if [ -f scan_response_*.sarif ]; then
      mv scan_response_*.sarif ../response.sarif
-     chmod 777 ../response.sarif
+     #chmod 777 ../response.sarif
  else
     # Adding empty SARIF response in response.sarif file.
     # This issue is from github/codeql-action/upload-sarif@v1 side. 
