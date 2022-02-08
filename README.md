@@ -129,7 +129,7 @@ jobs:
               directory: 'path of directory to scan (optional)'
 ```
 
-### Scan IaC in your repository on push/pull request/scheduled event with upload SARIF file on GitHub step.
+### Scan IaC in your repository on push/pull request/scheduled event with the step of uploading SARIF file on GitHub.
 Note: Upload SARIF file on GitHub Step will upload your scan report on GitHub and it will show all security alerts under(if any) **Security -> Code scanning alerts** tab.
 ```yaml
 name: Qualys IAC Scan 
