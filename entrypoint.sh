@@ -62,6 +62,7 @@ fi
  echo "SCAN RESULT"
  cd /
  #cat result.json
+ echo "Running parser script"
  python resultParser.py result.json
 
 
