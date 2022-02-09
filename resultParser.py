@@ -61,5 +61,4 @@ if __name__ == '__main__':
     except:
         print ("Error occured while scanning. Please find the error logs below :")
         print(raw_data)
-        exit(-1)
     print_failed_checks(json_data)
