@@ -9,23 +9,14 @@ def print_error_message(result):
     if result.get("results").get("failedChecks"):
         for r in result.get("results").get("failedChecks"):
             line_range = "None"
-            keys = ["filePath", "cvControl", "criticality", "remediation"]
-            keys_names = ["File Name", "CV Control", "Criticality", "Remediation"]
+            keys = ["filePath", "checkId", "checkName", "criticality", "remediation"]
+            keys_names = ["File Name", "Qualys CID", "Control Name", "Criticality", "Remediation"]
             error_message += "::error::"
             for k in range(0, len(keys)):
                 if r.get(keys[k]):
-                    if keys[k] == "cvControl":
-                        for c in r.get(keys[k]):
-                            error_message += "Qualys CID=" + c.get("cid") + ", "
-                            error_message += "Control Name=" + c.get("controlName")
-                        error_message += ", "
-                    else:
-                        error_message += keys_names[k] + "=" + r.get(keys[k]) + ", "
+                    error_message += keys_names[k] + "=" + r.get(keys[k]) + ", "
                 else:
-                    if keys[k] == "cvControl":
-                        error_message += "Qualys CID=None, Control Name=None, "
-                    else:
-                        error_message += keys_names[k] + "=None" + ", "
+                    error_message += keys_names[k] + "=None" + ", "
             if error_message.endswith(", "):
                 error_message = error_message[:-2]
 
@@ -61,5 +52,5 @@ if __name__ == '__main__':
     except:
         print ("Error occured while scanning. Please find the error logs below :")
         print(raw_data)
-        exit(-1)
+        exit(0)
     print_failed_checks(json_data)
