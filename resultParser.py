@@ -16,8 +16,8 @@ def print_error_message(result):
                 if r.get(keys[k]):
                     if keys[k] == "cvControl":
                         for c in r.get(keys[k]):
-                            error_message += "Qualys CID=" + c.get("cid") + ", "
-                            error_message += "Control Name=" + c.get("controlName")
+                            error_message += "Qualys CID=" + c.get("checkId") + ", "
+                            error_message += "Control Name=" + c.get("checkName")
                         error_message += ", "
                     else:
                         error_message += keys_names[k] + "=" + r.get(keys[k]) + ", "
