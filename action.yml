@@ -1,4 +1,4 @@
-name: 'Qualys IaC GitHub Action'
+name: 'Qualys IaC Security GitHub Action'
 author: 'Qualys'
 description: 'Find and fix security and compliance issues in infrastructure code using Qualys IaC GitHub Action'
 inputs:
