@@ -1,4 +1,4 @@
-name: 'POC Qualys IaC Security'
+name: 'POC'
 author: 'Qualys'
 description: 'Detect cloud misconfigurations proactively before deployments. Scan Infrastructure as Code (IaC) using Qualys IaC Security.'
 inputs:
