@@ -5,6 +5,15 @@ SOURCE_UUID="8c0ac08e-60ad-4a8a-9571-a2c56514b61a"
 SCANID_STR="Scan launched successfully. Scan ID: "
 
 echo "Action triggered by $GITHUB_EVENT_NAME event"
+echo "GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
+echo "GITHUB_REF_NAME= $GITHUB_REF_NAME"
+
+changed_files=""
+while read oldrev newrev refname; do
+  if [ "$refname" = $GITHUB_REF_NAME ]; then
+    changed_files=$(git diff-tree --name-only -r $oldrev $newrev)
+  fi
+done
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
 then
