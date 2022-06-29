@@ -16,8 +16,19 @@ echo"inside while.."
     changed_files=$(git diff-tree --name-only -r $oldrev $newrev)
   fi
 done
-
 echo "changed_files= $changed_files"
+while read -r oldrev newrev refname
+do
+  echo "Branch: $refname"
+  echo "Previous commit: $oldrev"
+  echo "New commit: $newrev"
+  if [ "$refname" = "refs/heads/master" ]
+  then
+    changed_files=$(git diff-tree --name-only -r "$oldrev" "$newrev")
+  fi
+done
+echo "changed_files= $changed_files"
+
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
 then
