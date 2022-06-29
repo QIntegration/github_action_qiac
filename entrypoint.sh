@@ -7,6 +7,8 @@ SCANID_STR="Scan launched successfully. Scan ID: "
 echo "Action triggered by $GITHUB_EVENT_NAME event"
 echo "GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
 echo "GITHUB_REF_NAME= $GITHUB_REF_NAME"
+echo "ls "
+ls
 
 changed_files=""
 while read oldrev newrev refname; do
