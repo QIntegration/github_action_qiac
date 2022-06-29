@@ -10,10 +10,14 @@ echo "GITHUB_REF_NAME= $GITHUB_REF_NAME"
 
 changed_files=""
 while read oldrev newrev refname; do
-  if [ "$refname" = $GITHUB_REF_NAME ]; then
+echo"inside while.."
+  if [ "$refname" = "refs/heads/$GITHUB_REF_NAME" ]; then
+    echo "inside if.."
     changed_files=$(git diff-tree --name-only -r $oldrev $newrev)
   fi
 done
+
+echo "changed_files= $changed_files"
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
 then
