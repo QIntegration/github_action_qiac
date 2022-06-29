@@ -32,16 +32,16 @@ echo "changed_files= $changed_files"
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
 then
-    if [ $(git diff --name-only --diff-filter=ACMRT HEAD^ HEAD | wc -l) -eq "0" ]; then 
+    if [ $(git diff --name-only --diff-filter=ACMRT HEAD~1 HEAD | wc -l) -eq "0" ]; then 
         echo "There are no files/folders to scan."
         echo "{\"version\": \"2.1.0\",\"runs\": [{\"tool\": {\"driver\": {\"name\": \"QualysIaCSecurity\",\"organization\": \"Qualys\"}},\"results\": []}]}" > response.sarif
         exit 0
     else
         echo "From the below files, Only the files with extensions supported by IaC module are included in the scan."
-        git diff --name-only --diff-filter=ACMRT HEAD^ HEAD
+        git diff --name-only --diff-filter=ACMRT HEAD~1 HEAD
         foldername="qiacscanfolder_$(date +%Y%m%d%H%M%S)"
         mkdir $foldername
-        cp --parents $(git diff --name-only --diff-filter=ACMRT HEAD^ HEAD) $foldername
+        cp --parents $(git diff --name-only --diff-filter=ACMRT HEAD~1 HEAD) $foldername
         SCANFOLDER=$foldername
     fi
 else
