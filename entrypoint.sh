@@ -9,7 +9,8 @@ echo "GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
 echo "GITHUB_REF_NAME= $GITHUB_REF_NAME"
 echo "ls "
 ls
-
+git fetch upstream
+git pull
 changed_files=""
 while read oldrev newrev refname; do
 echo"inside while.."
