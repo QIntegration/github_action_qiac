@@ -9,6 +9,7 @@ echo "GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
 echo "GITHUB_REF_NAME= $GITHUB_REF_NAME"
 echo "ls "
 ls
+git config --global --add safe.directory /github/workspace
 git fetch upstream
 git pull
 changed_files=""
