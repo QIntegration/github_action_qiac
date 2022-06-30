@@ -4,6 +4,8 @@ SCANFOLDER=$1
 SOURCE_UUID="8c0ac08e-60ad-4a8a-9571-a2c56514b61a"
 SCANID_STR="Scan launched successfully. Scan ID: "
 
+git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
 echo "Action triggered by $GITHUB_EVENT_NAME event"
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
