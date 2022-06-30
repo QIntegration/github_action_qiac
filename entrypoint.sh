@@ -5,34 +5,6 @@ SOURCE_UUID="8c0ac08e-60ad-4a8a-9571-a2c56514b61a"
 SCANID_STR="Scan launched successfully. Scan ID: "
 
 echo "Action triggered by $GITHUB_EVENT_NAME event"
-echo "GITHUB_HEAD_REF = $GITHUB_HEAD_REF"
-echo "GITHUB_REF_NAME= $GITHUB_REF_NAME"
-echo "ls "
-ls
-git config --global --add safe.directory /github/workspace
-git fetch upstream
-git pull
-changed_files=""
-while read oldrev newrev refname; do
-echo"inside while.."
-  if [ "$refname" = "refs/heads/$GITHUB_REF_NAME" ]; then
-    echo "inside if.."
-    changed_files=$(git diff-tree --name-only -r $oldrev $newrev)
-  fi
-done
-echo "changed_files= $changed_files"
-while read -r oldrev newrev refname
-do
-  echo "Branch: $refname"
-  echo "Previous commit: $oldrev"
-  echo "New commit: $newrev"
-  if [ "$refname" = "refs/heads/master" ]
-  then
-    changed_files=$(git diff-tree --name-only -r "$oldrev" "$newrev")
-  fi
-done
-echo "changed_files= $changed_files"
-
 
 if [ $GITHUB_EVENT_NAME = "push" ] || [ $GITHUB_EVENT_NAME = "pull_request" ]
 then
